@@ -2,7 +2,7 @@
 
 import { Actions } from '../actions/counter';
 
-export const CounterReducer = (state = { count: 0 }, action) => { 
+export const CounterReducer = (state = { count: 10 }, action) => { 
     switch (action.type) { 
         case Actions.Increment: 
             return Object.assign({}, state, { 

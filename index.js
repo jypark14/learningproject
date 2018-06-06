@@ -17,7 +17,7 @@ class App extends Component {
     render () {
         return (
             <Provider store={store}>
-                <Learning_Project />
+                <Learning_Project/>
             </Provider>
         );
     }
