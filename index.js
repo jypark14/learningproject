@@ -1,44 +1,26 @@
-import React, { Component } from 'react';
-import { AppRegistry, Button, SectionList, StyleSheet, Text, View } from 'react-native';
+// @ts-check
 
-export default class SectionListBasics extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <SectionList
-          sections={[
-            {title: 'D', data: ['button1']},
-            {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
-          ]}
-          renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-          renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-          keyExtractor={(item, index) => index}
-        />
-      </View>
-    );
-  }
+import React, { Component } from 'react'; 
+import { AppRegistry } from 'react-native';
+import { createStore } from 'redux';
+
+import { Provider } from 'react-redux';
+import rootReducer from './src/reducers/root';
+
+import Learning_Project from './src/components/counter';
+
+const store = createStore(rootReducer);
+
+import { View } from 'react-native';
+
+class App extends Component {
+    render () {
+        return (
+            <Provider store={store}>
+                <Learning_Project />
+            </Provider>
+        );
+    }
 }
 
-const styles = StyleSheet.create({
-  container: {
-   flex: 1,
-   paddingTop: 22
-  },
-  sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(247,247,247,1.0)',
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-})
-
-// skip this line if using Create React Native App
-AppRegistry.registerComponent('learning_project', () => SectionListBasics);
+AppRegistry.registerComponent('learning_project', () => App);
