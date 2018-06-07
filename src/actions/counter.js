@@ -1,13 +1,13 @@
 // @ts-check
 export const Actions = {
-    Increment: 'Increment',
-    Decrement: 'Decrement',
-  }
+  Increment: "Increment",
+  Decrement: "Decrement"
+};
 
 export const counterIncrement = () => ({
-    type: Actions.Increment, 
+  type: Actions.Increment
 });
 
-export const counterDecrement = () => ({ 
-    type: Actions.Decrement 
+export const counterDecrement = () => ({
+  type: Actions.Decrement
 });
