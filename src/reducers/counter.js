@@ -4,7 +4,7 @@ import { Actions } from "../actions/counter";
 
 const counter = {
   count: 0,
-  count2: 1
+  count2: 0
 };
 
 export const CounterReducer = (state = counter, action) => {

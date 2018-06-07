@@ -40,18 +40,16 @@ class Learning_Project extends Component {
     return (
       <View
         style={{
-          padding: 20
+          flex: 1,
+          flexDirection: "column"
         }}
       >
         <View
-          style={
-            {
-              // flex: 1,
-              // padding: 20,
-              // flexDirection: "row",
-              // justifyContent: "center"
-            }
-          }
+          style={{
+            padding: 20,
+            flexDirection: "row",
+            justifyContent: "center"
+          }}
         >
           <Button
             large
@@ -65,27 +63,33 @@ class Learning_Project extends Component {
           <Button
             large
             title="Decrement -"
-            color="red"
             onPress={this.props.actions.counterDecrement}
           />
         </View>
 
-        <Button
-          large
-          title="Increment +"
-          color="green"
-          onPress={this.props.actions.counterIncrement2}
-        />
-        <Text>
-          <Text style={styles.text}>{this.props.count2}</Text>
-        </Text>
-
-        <Button
-          large
-          title="Decrement -"
-          color="red"
-          onPress={this.props.actions.counterDecrement2}
-        />
+        <View
+          style={{
+            padding: 5,
+            flexDirection: "row",
+            justifyContent: "center"
+          }}
+        >
+          <Button
+            large
+            title="Increment +"
+            color="green"
+            onPress={this.props.actions.counterIncrement2}
+          />
+          <Text>
+            <Text style={styles.text}>{this.props.count2}</Text>
+          </Text>
+          <Button
+            large
+            title="Decrement -"
+            color="red"
+            onPress={this.props.actions.counterDecrement2}
+          />
+        </View>
       </View>
     );
   }
