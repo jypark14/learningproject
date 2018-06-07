@@ -35,12 +35,36 @@ class Learning_Project extends Component {
     return (
       <View
         style={{
-          flex: 1,
-          padding: 20,
-          flexDirection: "row",
-          justifyContent: "center"
+          padding: 20
         }}
       >
+        <View
+          style={
+            {
+              // flex: 1,
+              // padding: 20,
+              // flexDirection: "row",
+              // justifyContent: "center"
+            }
+          }
+        >
+          <Button
+            large
+            title="Increment +"
+            color="green"
+            onPress={this.props.actions.counterIncrement}
+          />
+          <Text>
+            <Text style={styles.text}>{this.props.count}</Text>
+          </Text>
+          <Button
+            large
+            title="Decrement -"
+            color="red"
+            onPress={this.props.actions.counterDecrement}
+          />
+        </View>
+
         <Button
           large
           title="Increment +"
@@ -50,6 +74,7 @@ class Learning_Project extends Component {
         <Text>
           <Text style={styles.text}>{this.props.count}</Text>
         </Text>
+
         <Button
           large
           title="Decrement -"
@@ -62,7 +87,8 @@ class Learning_Project extends Component {
 }
 
 const mapStateToProps = state => ({
-  count: state.CounterReducer.count
+  count1: state.CounterReducer.count2,
+  count: state.CounterReducer.count1
 });
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ counterIncrement, counterDecrement }, dispatch)
