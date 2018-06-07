@@ -87,8 +87,7 @@ class Learning_Project extends Component {
 }
 
 const mapStateToProps = state => ({
-  count1: state.CounterReducer.count2,
-  count: state.CounterReducer.count1
+  count: state.CounterReducer.count
 });
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ counterIncrement, counterDecrement }, dispatch)
