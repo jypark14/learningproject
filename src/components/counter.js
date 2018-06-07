@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class Learning_Project extends Component {
+export class Learning_Project extends Component {
   render() {
     return (
       <View
