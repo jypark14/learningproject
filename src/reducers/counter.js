@@ -17,6 +17,15 @@ export const CounterReducer = (state = counter, action) => {
       return Object.assign({}, state, {
         count: state.count - 1
       });
+
+    case Actions.Increment2:
+      return Object.assign({}, state, {
+        count2: state.count2 + 1
+      });
+    case Actions.Decrement2:
+      return Object.assign({}, state, {
+        count2: state.count2 - 1
+      });
     default:
       return state;
   }
