@@ -1,10 +1,11 @@
 // @ts-check
 
 import React, { Component } from 'react'; 
-
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {StyleSheet, Text, View, Button} from 'react-native'
+import {StyleSheet, Text, View} from 'react-native'
+import { Button } from 'react-native-elements'
+
 import {counterIncrement, counterDecrement}  from '../actions/counter';
 
 const styles = StyleSheet.create({ 
@@ -22,28 +23,59 @@ const styles = StyleSheet.create({
         fontSize: 26,
         fontWeight: 'bold',
     },
-    signInButtonText: { 
-        
-    }
+    text: {
+        fontFamily: "Roboto-Light",
+        fontSize: 40,
+        textAlign: "center",
+        margin: 10
+    },
 });
 
 class Learning_Project extends Component { 
     render() {
         return( 
-            <View>               
-              <Button
-                title=" Increment + "
-                color="#841584"
-                onPress={this.props.actions.counterIncrement}/>
-             <Text>
+            <View style={{
+                flex: 1,
+                padding: 20,
+                flexDirection: 'row',
+                justifyContent: 'center',
+              }}>
+            <Button
+            large
+            title='Increment +'
+            color = "green"
+            //icon={{name: 'envira', type: 'font-awesome'}}
+            onPress={this.props.actions.counterIncrement}/>
+            
+            <Text>
+                <Text style={styles.text}>
                 {this.props.count}
-             </Text>
+                </Text>
+            </Text>
+
              <Button
-                title=" Decrement - "
-                color="#841584"
-                onPress={this.props.actions.counterDecrement}/>
-             </View>
-      );
+            large
+            title='Decrement -'
+            color = "red"
+            
+            onPress={this.props.actions.counterDecrement}
+             />
+            </View>
+            );
+            
+                           
+            //     title=" Increment + "
+            //     color="#841584"
+            //     onPress={this.props.actions.counterIncrement}/>
+            //  <Text>
+            //     {this.props.count}
+            //  </Text>
+            //  <Button
+            //     title=" Decrement - "
+            //     color="#841584"
+            //     onPress={this.props.actions.counterDecrement}/>
+            //  </View>
+      
     }
 }
 
