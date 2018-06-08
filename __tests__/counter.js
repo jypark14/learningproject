@@ -39,10 +39,7 @@ describe("CounterReducer test", () => {
 describe("CounterReducer test", () => {
   it("should handle Increment on count2", () => {
     expect(
-      CounterReducer(
-        { count: 0, count2: 0 },
-        { type: counterIncrement2().type }
-      )
+      CounterReducer({ count: 0, count2: 0 }, counterIncrement2())
     ).toEqual({
       count: 0,
       count2: 1
@@ -53,10 +50,7 @@ describe("CounterReducer test", () => {
 describe("CounterReducer test", () => {
   it("should handle Decrement on count1", () => {
     expect(
-      CounterReducer(
-        { count: 3, count2: 0 },
-        { type: counterIncrement2().type }
-      )
+      CounterReducer({ count: 3, count2: 0 }, counterIncrement2())
     ).toEqual({
       count: 3,
       count2: 1
