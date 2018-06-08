@@ -1,7 +1,7 @@
 // @ts-check
 import { combineReducers } from "redux";
-import { CounterReducer, counterCountReducer } from "./counter";
+import { counterCountReducer } from "./counter";
 
-const rootReducer = combineReducers({ CounterReducer, counterCountReducer });
+const rootReducer = combineReducers({ counterCountReducer });
 
 export default rootReducer;

@@ -8,19 +8,12 @@ import { Button } from "react-native-elements";
 import {
   counterIncrement,
   counterDecrement,
-  counterIncrement2,
-  counterDecrement2,
   newCounter
 } from "../actions/counter";
 
 const styles = StyleSheet.create({
-  counter_row_first: {
-    padding: 20,
-    flexDirection: "row",
-    justifyContent: "center"
-  },
   counter_row: {
-    // padding: 0,
+    padding: 5,
     flexDirection: "row",
     justifyContent: "center"
   },
@@ -37,12 +30,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const renderRows = counterCount => {
-  this.props.counterList.map(counterNum => {
-    return <Text style={styles.text}>{this.props.count}</Text>;
-  });
-};
-
 export class Learning_Project extends Component {
   render() {
     return (
@@ -53,27 +40,29 @@ export class Learning_Project extends Component {
           color="blue"
           onPress={this.props.actions.newCounter}
         />
-        {this.props.counterList.map((prop, key) => {
-          return <Text style={styles.text}>{this.props.count}</Text>;
+        {this.props.counterList.map((counter, index) => {
+          return (
+            <View style={styles.counter_row} key={index}>
+              <Button
+                large
+                title="Increment +"
+                color="green"
+                onPress={() => {
+                  this.props.actions.counterIncrement(index);
+                }}
+              />
+              <Text style={styles.text}>{counter.count}</Text>
+              <Button
+                large
+                title="Decrement -"
+                onPress={() => {
+                  this.props.actions.counterDecrement(index);
+                }}
+              />
+            </View>
+          );
         })}
-
-        <Text style={styles.text}>{this.props.counterCount}</Text>
-
-        <View style={styles.counter_row_first}>
-          <Button
-            large
-            title="Increment +"
-            color="green"
-            onPress={this.props.actions.counterIncrement}
-          />
-          <Text style={styles.text}>{this.props.count}</Text>
-          <Button
-            large
-            title="Decrement -"
-            onPress={this.props.actions.counterDecrement}
-          />
-        </View>
-        <View style={styles.counter_row}>
+        {/* <View style={styles.counter_row}>
           <Button
             large
             title="Increment +"
@@ -87,15 +76,14 @@ export class Learning_Project extends Component {
             color="red"
             onPress={this.props.actions.counterDecrement2}
           />
-        </View>
+        </View> */}
       </View>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  count: state.CounterReducer.count,
-  count2: state.CounterReducer.count2,
+  count: state.counterCountReducer.count,
   counterCount: state.counterCountReducer.counterCount,
   counterList: state.counterCountReducer.counterList
 });
@@ -105,8 +93,6 @@ const mapDispatchToProps = dispatch => ({
     {
       counterIncrement,
       counterDecrement,
-      counterIncrement2,
-      counterDecrement2,
       newCounter
     },
     dispatch
