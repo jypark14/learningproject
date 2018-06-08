@@ -9,7 +9,8 @@ import {
   counterIncrement,
   counterDecrement,
   counterIncrement2,
-  counterDecrement2
+  counterDecrement2,
+  newCounter
 } from "../actions/counter";
 
 const styles = StyleSheet.create({
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   counter_row: {
-    padding: 20,
+    // padding: 0,
     flexDirection: "row",
     justifyContent: "center"
   },
@@ -40,6 +41,12 @@ export class Learning_Project extends Component {
   render() {
     return (
       <View style={styles.counter_col}>
+        <Button
+          large
+          title="Add counter"
+          color="blue"
+          onPress={this.props.actions.newCounter}
+        />
         <View style={styles.counter_row_first}>
           <Button
             large
