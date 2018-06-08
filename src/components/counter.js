@@ -47,6 +47,8 @@ export class Learning_Project extends Component {
           color="blue"
           onPress={this.props.actions.newCounter}
         />
+        <Text style={styles.text}>{this.props.counterCount}</Text>
+
         <View style={styles.counter_row_first}>
           <Button
             large
@@ -83,15 +85,18 @@ export class Learning_Project extends Component {
 
 const mapStateToProps = state => ({
   count: state.CounterReducer.count,
-  count2: state.CounterReducer.count2
+  count2: state.CounterReducer.count2,
+  counterCount: state.counterCountReducer.counterCount
 });
+
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
     {
       counterIncrement,
       counterDecrement,
       counterIncrement2,
-      counterDecrement2
+      counterDecrement2,
+      newCounter
     },
     dispatch
   )
