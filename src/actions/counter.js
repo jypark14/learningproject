@@ -7,8 +7,6 @@ export const Actions = {
   newCounter: "newCounter"
 };
 
-const counterList = [];
-
 export const newCounter = () => ({
   type: Actions.newCounter
 });

@@ -37,6 +37,12 @@ const styles = StyleSheet.create({
   }
 });
 
+const renderRows = counterCount => {
+  this.props.counterList.map(counterNum => {
+    return <Text style={styles.text}>{this.props.count}</Text>;
+  });
+};
+
 export class Learning_Project extends Component {
   render() {
     return (
@@ -47,6 +53,10 @@ export class Learning_Project extends Component {
           color="blue"
           onPress={this.props.actions.newCounter}
         />
+        {this.props.counterList.map((prop, key) => {
+          return <Text style={styles.text}>{this.props.count}</Text>;
+        })}
+
         <Text style={styles.text}>{this.props.counterCount}</Text>
 
         <View style={styles.counter_row_first}>
@@ -86,7 +96,8 @@ export class Learning_Project extends Component {
 const mapStateToProps = state => ({
   count: state.CounterReducer.count,
   count2: state.CounterReducer.count2,
-  counterCount: state.counterCountReducer.counterCount
+  counterCount: state.counterCountReducer.counterCount,
+  counterList: state.counterCountReducer.counterList
 });
 
 const mapDispatchToProps = dispatch => ({
