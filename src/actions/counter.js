@@ -2,11 +2,17 @@
 export const Actions = {
   Increment: "Increment",
   Decrement: "Decrement",
-  newCounter: "newCounter"
+  newCounter: "newCounter",
+  closeCounter: "closeCounter"
 };
 
 export const newCounter = () => ({
   type: Actions.newCounter
+});
+
+export const closeCounter = key => ({
+  type: Actions.closeCounter,
+  key
 });
 
 export const counterIncrement = key => ({

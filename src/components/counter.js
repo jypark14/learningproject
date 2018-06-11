@@ -3,19 +3,21 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 import { Button } from "react-native-elements";
 import {
   counterIncrement,
   counterDecrement,
-  newCounter
+  newCounter,
+  closeCounter
 } from "../actions/counter";
 
 const styles = StyleSheet.create({
   counter_row: {
     padding: 5,
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
+    alignItems: "stretch"
   },
   counter_col: {
     flex: 1,
@@ -23,14 +25,47 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "Roboto-Light",
-    fontSize: 40,
+    fontSize: 20,
     flexDirection: "row",
     textAlign: "center",
     margin: 10
+  },
+  close_button: {
+    flexDirection: "row",
+    textAlign: "center"
   }
 });
 
 export class Learning_Project extends Component {
+  renderItem({ item, index }) {
+    return (
+      <View style={styles.counter_row}>
+        <Button
+          title="Increment +"
+          color="green"
+          onPress={() => {
+            this.props.actions.counterIncrement(index);
+          }}
+        />
+        <Text style={styles.text}>{item.count}</Text>
+        <Button
+          title="Decrement -"
+          color="red"
+          onPress={() => {
+            this.props.actions.counterDecrement(index);
+          }}
+        />
+        <Button
+          title="X"
+          color="black"
+          onPress={() => {
+            this.props.actions.closeCounter(index);
+          }}
+        />
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={styles.counter_col}>
@@ -40,53 +75,17 @@ export class Learning_Project extends Component {
           color="blue"
           onPress={this.props.actions.newCounter}
         />
-        {this.props.counterList.map((counter, index) => {
-          return (
-            <View style={styles.counter_row} key={index}>
-              <Button
-                large
-                title="Increment +"
-                color="green"
-                onPress={() => {
-                  this.props.actions.counterIncrement(index);
-                  this.forceUpdate();
-                }}
-              />
-              <Text style={styles.text}>{counter.count}</Text>
-              <Button
-                large
-                title="Decrement -"
-                onPress={() => {
-                  this.props.actions.counterDecrement(index);
-                  this.forceUpdate();
-                }}
-              />
-            </View>
-          );
-        })}
-        {/* <View style={styles.counter_row}>
-          <Button
-            large
-            title="Increment +"
-            color="green"
-            onPress={this.props.actions.counterIncrement2}
-          />
-          <Text style={styles.text}>{this.props.count2}</Text>
-          <Button
-            large
-            title="Decrement -"
-            color="red"
-            onPress={this.props.actions.counterDecrement2}
-          />
-        </View> */}
+        <FlatList
+          keyExtractor={item => item.key}
+          data={this.props.counterList}
+          renderItem={this.renderItem.bind(this)}
+        />
       </View>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  count: state.counterCountReducer.count,
-  counterCount: state.counterCountReducer.counterCount,
   counterList: state.counterCountReducer.counterList
 });
 
@@ -95,7 +94,8 @@ const mapDispatchToProps = dispatch => ({
     {
       counterIncrement,
       counterDecrement,
-      newCounter
+      newCounter,
+      closeCounter
     },
     dispatch
   )
