@@ -49,6 +49,7 @@ export class Learning_Project extends Component {
                 color="green"
                 onPress={() => {
                   this.props.actions.counterIncrement(index);
+                  this.forceUpdate();
                 }}
               />
               <Text style={styles.text}>{counter.count}</Text>
@@ -57,6 +58,7 @@ export class Learning_Project extends Component {
                 title="Decrement -"
                 onPress={() => {
                   this.props.actions.counterDecrement(index);
+                  this.forceUpdate();
                 }}
               />
             </View>
