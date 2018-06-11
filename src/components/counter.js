@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export class Learning_Project extends Component {
+class Learning_Project extends Component {
   renderItem({ item, index }) {
     return (
       <View style={styles.counter_row}>
@@ -65,42 +65,43 @@ export class Learning_Project extends Component {
       </View>
     );
   }
-
-  render() {
-    return (
-      <View style={styles.counter_col}>
-        <Button
-          large
-          title="Add counter"
-          color="blue"
-          onPress={this.props.actions.newCounter}
-        />
-        <FlatList
-          keyExtractor={item => item.key}
-          data={this.props.counterList}
-          renderItem={this.renderItem.bind(this)}
-        />
-      </View>
-    );
-  }
 }
+export default Learning_Project;
+//   render() {
+//     return (
+//       <View style={styles.counter_col}>
+//         <Button
+//           large
+//           title="Add counter"
+//           color="blue"
+//           onPress={this.props.actions.newCounter}
+//         />
+//         <FlatList
+//           keyExtractor={item => item.key}
+//           data={this.props.counterList}
+//           renderItem={this.renderItem.bind(this)}
+//         />
+//       </View>
+//     );
+//   }
+// }
 
-const mapStateToProps = state => ({
-  counterList: state.counterCountReducer.counterList
-});
+// const mapStateToProps = state => ({
+//   counterList: state.counterCountReducer.counterList
+// });
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(
-    {
-      counterIncrement,
-      counterDecrement,
-      newCounter,
-      closeCounter
-    },
-    dispatch
-  )
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Learning_Project);
+// const mapDispatchToProps = dispatch => ({
+//   actions: bindActionCreators(
+//     {
+//       counterIncrement,
+//       counterDecrement,
+//       newCounter,
+//       closeCounter
+//     },
+//     dispatch
+//   )
+// });
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(Learning_Project);

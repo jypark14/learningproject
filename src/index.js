@@ -7,6 +7,8 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers/root";
 import Learning_Project from "./components/counter";
+import { renderCol } from "./containers/counter";
+
 import { View } from "react-native";
 
 const store = createStore(rootReducer);
