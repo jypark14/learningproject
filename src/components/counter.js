@@ -11,6 +11,7 @@ import {
   newCounter,
   closeCounter
 } from "../actions/counter";
+import uuid from "uuid";
 
 const styles = StyleSheet.create({
   counter_row: {
@@ -36,72 +37,56 @@ const styles = StyleSheet.create({
   }
 });
 
-class Learning_Project extends Component {
-  renderItem({ item, index }) {
+class CounterRow extends Component {
+  render() {
     return (
       <View style={styles.counter_row}>
         <Button
           title="Increment +"
           color="green"
           onPress={() => {
-            this.props.actions.counterIncrement(index);
+            this.props.actions.counterIncrement(this.props.index);
           }}
         />
-        <Text style={styles.text}>{item.count}</Text>
+        <Text style={styles.text}>
+          {this.props.data[this.props.index].count}
+        </Text>
         <Button
           title="Decrement -"
           color="red"
           onPress={() => {
-            this.props.actions.counterDecrement(index);
+            this.props.actions.counterDecrement(this.props.index);
           }}
         />
         <Button
           title="X"
           color="black"
           onPress={() => {
-            this.props.actions.closeCounter(index);
+            this.props.actions.closeCounter(this.props.index);
           }}
         />
       </View>
     );
   }
 }
-export default Learning_Project;
-//   render() {
-//     return (
-//       <View style={styles.counter_col}>
-//         <Button
-//           large
-//           title="Add counter"
-//           color="blue"
-//           onPress={this.props.actions.newCounter}
-//         />
-//         <FlatList
-//           keyExtractor={item => item.key}
-//           data={this.props.counterList}
-//           renderItem={this.renderItem.bind(this)}
-//         />
-//       </View>
-//     );
-//   }
-// }
 
-// const mapStateToProps = state => ({
-//   counterList: state.counterCountReducer.counterList
-// });
+const mapStateToProps = state => ({
+  counterList: state.counterCountReducer.counterList
+});
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(
+    {
+      counterIncrement,
+      counterDecrement,
+      newCounter,
+      closeCounter
+    },
+    dispatch
+  )
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CounterRow);
 
-// const mapDispatchToProps = dispatch => ({
-//   actions: bindActionCreators(
-//     {
-//       counterIncrement,
-//       counterDecrement,
-//       newCounter,
-//       closeCounter
-//     },
-//     dispatch
-//   )
-// });
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Learning_Project);
+//export default CounterRow;

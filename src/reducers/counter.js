@@ -5,7 +5,7 @@ import uuid from "uuid";
 
 const counter = {
   count: 0,
-  key: ""
+  id: ""
 };
 
 const counterCount = {
@@ -15,8 +15,7 @@ const counterCount = {
 export const counterCountReducer = (state = counterCount, action) => {
   switch (action.type) {
     case Actions.newCounter: {
-      const counterNew = Object.assign({}, counter);
-      counterNew.key = uuid.v4();
+      const counterNew = Object.assign({}, counter, { id: action.id });
       const newCounterList = [...state.counterList, counterNew];
       return Object.assign({}, state, { counterList: newCounterList });
     }
@@ -24,7 +23,7 @@ export const counterCountReducer = (state = counterCount, action) => {
     case Actions.closeCounter: {
       const deletedList = state.counterList.filter((elem, index) => {
         if (index !== action.key) {
-          return { count: elem.count, key: elem.key };
+          return { count: elem.count, id: elem.id };
         }
       });
       return Object.assign({}, state, { counterList: deletedList });
@@ -33,7 +32,7 @@ export const counterCountReducer = (state = counterCount, action) => {
     case Actions.Increment: {
       const newCounters = state.counterList.map((elem, index) => {
         if (index === action.key) {
-          return { count: elem.count + 1, key: elem.key };
+          return { count: elem.count + 1, id: elem.id };
         }
         return elem;
       });
@@ -43,7 +42,7 @@ export const counterCountReducer = (state = counterCount, action) => {
     case Actions.Decrement: {
       const newCounters = state.counterList.map((elem, index) => {
         if (index === action.key) {
-          return { count: elem.count - 1, key: elem.key };
+          return { count: elem.count - 1, id: elem.id };
         }
         return elem;
       });

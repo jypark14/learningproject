@@ -1,4 +1,5 @@
 // @ts-check
+
 export const Actions = {
   Increment: "Increment",
   Decrement: "Decrement",
@@ -6,8 +7,9 @@ export const Actions = {
   closeCounter: "closeCounter"
 };
 
-export const newCounter = () => ({
-  type: Actions.newCounter
+export const newCounter = id => ({
+  type: Actions.newCounter,
+  id
 });
 
 export const closeCounter = key => ({

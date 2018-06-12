@@ -6,8 +6,8 @@ import { createStore } from "redux";
 
 import { Provider } from "react-redux";
 import rootReducer from "./reducers/root";
-import Learning_Project from "./components/counter";
-import { renderCol } from "./containers/counter";
+
+import CounterList from "./containers/counter";
 
 import { View } from "react-native";
 
@@ -17,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Learning_Project />
+        <CounterList />
       </Provider>
     );
   }
