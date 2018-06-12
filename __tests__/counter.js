@@ -2,58 +2,81 @@
 import "react-native";
 import React from "react";
 import renderer from "react-test-renderer";
-import { Learning_Project } from "../src/components/counter";
+import { CounterList } from "../src/containers/counter";
 import { Actions } from "../src/actions/counter";
-import { CounterReducer } from "../src/reducers/counter";
+import { counterCountReducer } from "../src/reducers/counter";
 import {
   counterIncrement,
   counterDecrement,
-  counterIncrement2,
-  counterDecrement2
+  newCounter,
+  closeCounter
 } from "../src/actions/counter";
+
 describe("Stateless Components Render", () => {
   const stringProp = "test";
+  it("Project render", () => {
+    renderer.create(<CounterList />);
+  });
+});
 
-  it("Learning Project render", () => {
-    renderer.create(
-      <Learning_Project
-        actions={{
-          counterIncrement: () => undefined,
-          counterDecrement: () => undefined
-        }}
-      />
+describe("newCounter test", () => {
+  it("should include a new counter in list", () => {
+    const counterCount = {
+      counterList: []
+    };
+    const newCounterCount = counterCountReducer(counterCount, newCounter());
+    expect(newCounterCount.counterList).toEqual([{ count: 0, id: undefined }]);
+  });
+});
+
+describe("counter increment test", () => {
+  it("should increment on count on 1st index", () => {
+    const counterCount = {
+      counterList: [{ count: 1, id: "abcd" }, { count: 3, id: "efgh" }]
+    };
+    const increasedCounterCount = counterCountReducer(
+      counterCount,
+      counterIncrement("abcd")
     );
+    expect(increasedCounterCount.counterList).toEqual([
+      { count: 2, id: "abcd" },
+      { count: 3, id: "efgh" }
+    ]);
   });
 });
 
-// Expected array but received object
-describe("CounterReducer test", () => {
-  it("should return initial state", () => {
-    expect(CounterReducer(undefined, {})).toEqual({
-      count: 0,
-      count2: 0
-    });
+describe("counter decrement test", () => {
+  it("should decrease count on 2nd index", () => {
+    const counterCount = {
+      counterList: [{ count: 1, id: "abcd" }, { count: 3, id: "efgh" }]
+    };
+    const decreasedCounterCount = counterCountReducer(
+      counterCount,
+      counterDecrement("efgh")
+    );
+    expect(decreasedCounterCount.counterList).toEqual([
+      { count: 1, id: "abcd" },
+      { count: 2, id: "efgh" }
+    ]);
   });
 });
 
-describe("CounterReducer test", () => {
-  it("should handle Increment on count2", () => {
-    expect(
-      CounterReducer({ count: 0, count2: 0 }, counterIncrement2())
-    ).toEqual({
-      count: 0,
-      count2: 1
-    });
-  });
-});
-
-describe("CounterReducer test", () => {
-  it("should handle Decrement on count1", () => {
-    expect(
-      CounterReducer({ count: 3, count2: 0 }, counterIncrement2())
-    ).toEqual({
-      count: 3,
-      count2: 1
-    });
+describe("counter close test", () => {
+  it("should filter the counter", () => {
+    const counterCount = {
+      counterList: [
+        { count: 1, id: "abcd" },
+        { count: 3, id: "efgh" },
+        { count: 0, id: "jklm" }
+      ]
+    };
+    const closeCounterTest = counterCountReducer(
+      counterCount,
+      closeCounter("efgh")
+    );
+    expect(closeCounterTest.counterList).toEqual([
+      { count: 1, id: "abcd" },
+      { count: 0, id: "jklm" }
+    ]);
   });
 });

@@ -4,28 +4,49 @@ import { Actions } from "../actions/counter";
 
 const counter = {
   count: 0,
-  count2: 0
+  id: ""
 };
 
-export const CounterReducer = (state = counter, action) => {
-  switch (action.type) {
-    case Actions.Increment:
-      return Object.assign({}, state, {
-        count: state.count + 1
-      });
-    case Actions.Decrement:
-      return Object.assign({}, state, {
-        count: state.count - 1
-      });
+const counterCount = {
+  counterList: []
+};
 
-    case Actions.Increment2:
-      return Object.assign({}, state, {
-        count2: state.count2 + 1
+export const counterCountReducer = (state = counterCount, action) => {
+  switch (action.type) {
+    case Actions.newCounter: {
+      const counterNew = Object.assign({}, counter, { id: action.id });
+      const newCounterList = [...state.counterList, counterNew];
+      return Object.assign({}, state, { counterList: newCounterList });
+    }
+
+    case Actions.closeCounter: {
+      const deletedList = state.counterList.filter((elem, index) => {
+        if (action.key !== elem.id) {
+          return { count: elem.count, id: elem.id };
+        }
       });
-    case Actions.Decrement2:
-      return Object.assign({}, state, {
-        count2: state.count2 - 1
+      return Object.assign({}, state, { counterList: deletedList });
+    }
+
+    case Actions.Increment: {
+      const newCounters = state.counterList.map((elem, index) => {
+        if (elem.id === action.key) {
+          return { count: elem.count + 1, id: elem.id };
+        }
+        return elem;
       });
+      return Object.assign({}, state, { counterList: newCounters });
+    }
+
+    case Actions.Decrement: {
+      const newCounters = state.counterList.map((elem, index) => {
+        if (elem.id === action.key) {
+          return { count: elem.count - 1, id: elem.id };
+        }
+        return elem;
+      });
+      return Object.assign({}, state, { counterList: newCounters });
+    }
     default:
       return state;
   }

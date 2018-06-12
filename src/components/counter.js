@@ -3,25 +3,21 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 import { Button } from "react-native-elements";
 import {
   counterIncrement,
   counterDecrement,
-  counterIncrement2,
-  counterDecrement2
+  newCounter,
+  closeCounter
 } from "../actions/counter";
 
 const styles = StyleSheet.create({
-  counter_row_first: {
-    padding: 20,
-    flexDirection: "row",
-    justifyContent: "center"
-  },
   counter_row: {
-    padding: 20,
+    padding: 5,
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
+    alignItems: "stretch"
   },
   counter_col: {
     flex: 1,
@@ -29,67 +25,46 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "Roboto-Light",
-    fontSize: 40,
+    fontSize: 20,
     flexDirection: "row",
     textAlign: "center",
     margin: 10
+  },
+  close_button: {
+    flexDirection: "row",
+    textAlign: "center"
   }
 });
 
-export class Learning_Project extends Component {
+class CounterRow extends Component {
   render() {
     return (
-      <View style={styles.counter_col}>
-        <View style={styles.counter_row_first}>
-          <Button
-            large
-            title="Increment +"
-            color="green"
-            onPress={this.props.actions.counterIncrement}
-          />
-          <Text style={styles.text}>{this.props.count}</Text>
-          <Button
-            large
-            title="Decrement -"
-            onPress={this.props.actions.counterDecrement}
-          />
-        </View>
-        <View style={styles.counter_row}>
-          <Button
-            large
-            title="Increment +"
-            color="green"
-            onPress={this.props.actions.counterIncrement2}
-          />
-          <Text style={styles.text}>{this.props.count2}</Text>
-          <Button
-            large
-            title="Decrement -"
-            color="red"
-            onPress={this.props.actions.counterDecrement2}
-          />
-        </View>
+      <View style={styles.counter_row}>
+        <Button
+          title="Increment +"
+          color="green"
+          onPress={() => {
+            this.props.counterIncrement(this.props.data.id);
+          }}
+        />
+        <Text style={styles.text}>{this.props.data.count}</Text>
+        <Button
+          title="Decrement -"
+          color="red"
+          onPress={() => {
+            this.props.counterDecrement(this.props.data.id);
+          }}
+        />
+        <Button
+          title="X"
+          color="black"
+          onPress={() => {
+            this.props.closeCounter(this.props.data.id);
+          }}
+        />
       </View>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  count: state.CounterReducer.count,
-  count2: state.CounterReducer.count2
-});
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(
-    {
-      counterIncrement,
-      counterDecrement,
-      counterIncrement2,
-      counterDecrement2
-    },
-    dispatch
-  )
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Learning_Project);
+export default CounterRow;

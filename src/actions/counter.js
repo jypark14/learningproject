@@ -1,23 +1,28 @@
 // @ts-check
+
 export const Actions = {
   Increment: "Increment",
   Decrement: "Decrement",
-  Increment2: "Increment2",
-  Decrement2: "Decrement2"
+  newCounter: "newCounter",
+  closeCounter: "closeCounter"
 };
 
-export const counterIncrement = () => ({
-  type: Actions.Increment
+export const newCounter = id => ({
+  type: Actions.newCounter,
+  id
 });
 
-export const counterDecrement = () => ({
-  type: Actions.Decrement
+export const closeCounter = key => ({
+  type: Actions.closeCounter,
+  key
 });
 
-export const counterIncrement2 = () => ({
-  type: Actions.Increment2
+export const counterIncrement = key => ({
+  type: Actions.Increment,
+  key
 });
 
-export const counterDecrement2 = () => ({
-  type: Actions.Decrement2
+export const counterDecrement = key => ({
+  type: Actions.Decrement,
+  key
 });
