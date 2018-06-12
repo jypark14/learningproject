@@ -11,7 +11,6 @@ import {
   newCounter,
   closeCounter
 } from "../actions/counter";
-import uuid from "uuid";
 
 const styles = StyleSheet.create({
   counter_row: {
@@ -45,24 +44,22 @@ class CounterRow extends Component {
           title="Increment +"
           color="green"
           onPress={() => {
-            this.props.actions.counterIncrement(this.props.index);
+            this.props.counterIncrement(this.props.data.id);
           }}
         />
-        <Text style={styles.text}>
-          {this.props.data[this.props.index].count}
-        </Text>
+        <Text style={styles.text}>{this.props.data.count}</Text>
         <Button
           title="Decrement -"
           color="red"
           onPress={() => {
-            this.props.actions.counterDecrement(this.props.index);
+            this.props.counterDecrement(this.props.data.id);
           }}
         />
         <Button
           title="X"
           color="black"
           onPress={() => {
-            this.props.actions.closeCounter(this.props.index);
+            this.props.closeCounter(this.props.data.id);
           }}
         />
       </View>
@@ -70,23 +67,4 @@ class CounterRow extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  counterList: state.counterCountReducer.counterList
-});
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(
-    {
-      counterIncrement,
-      counterDecrement,
-      newCounter,
-      closeCounter
-    },
-    dispatch
-  )
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CounterRow);
-
-//export default CounterRow;
+export default CounterRow;

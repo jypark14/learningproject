@@ -1,7 +1,6 @@
 // @ts-check
 
 import { Actions } from "../actions/counter";
-import uuid from "uuid";
 
 const counter = {
   count: 0,
@@ -22,7 +21,7 @@ export const counterCountReducer = (state = counterCount, action) => {
 
     case Actions.closeCounter: {
       const deletedList = state.counterList.filter((elem, index) => {
-        if (index !== action.key) {
+        if (action.key !== elem.id) {
           return { count: elem.count, id: elem.id };
         }
       });
@@ -31,7 +30,7 @@ export const counterCountReducer = (state = counterCount, action) => {
 
     case Actions.Increment: {
       const newCounters = state.counterList.map((elem, index) => {
-        if (index === action.key) {
+        if (elem.id === action.key) {
           return { count: elem.count + 1, id: elem.id };
         }
         return elem;
@@ -41,7 +40,7 @@ export const counterCountReducer = (state = counterCount, action) => {
 
     case Actions.Decrement: {
       const newCounters = state.counterList.map((elem, index) => {
-        if (index === action.key) {
+        if (elem.id === action.key) {
           return { count: elem.count - 1, id: elem.id };
         }
         return elem;

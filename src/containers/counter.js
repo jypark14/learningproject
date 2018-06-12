@@ -15,12 +15,6 @@ import CounterRow from "../components/counter";
 import uuid from "uuid";
 
 const styles = StyleSheet.create({
-  counter_row: {
-    padding: 5,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "stretch"
-  },
   counter_col: {
     flex: 1,
     flexDirection: "column"
@@ -31,8 +25,7 @@ class CounterList extends Component {
   renderItem({ data, index }) {
     return (
       <CounterRow
-        index={index}
-        data={this.props.counterList}
+        data={this.props.counterList[index]}
         //actions={{ counterIncrement: this.props.actions.counterIncrement }}
         counterIncrement={this.props.actions.counterIncrement}
         counterDecrement={this.props.actions.counterDecrement}
@@ -42,7 +35,7 @@ class CounterList extends Component {
   }
   render() {
     return (
-      <View style={styles.counter_col} key={this.props.index}>
+      <View style={styles.counter_col}>
         <Button
           large
           title="Add counter"
