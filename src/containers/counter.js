@@ -26,7 +26,6 @@ export class CounterList extends Component {
     return (
       <CounterRow
         data={item}
-        //actions={{ counterIncrement: this.props.actions.counterIncrement }}
         counterIncrement={this.props.actions.counterIncrement}
         counterDecrement={this.props.actions.counterDecrement}
         closeCounter={this.props.actions.closeCounter}
@@ -44,10 +43,6 @@ export class CounterList extends Component {
         />
         <FlatList
           keyExtractor={cell => cell.id}
-          // Below is the same code
-          //   keyExtractor={cell => {
-          //     return cell.id;
-          //   }}
           data={this.props.counterList}
           renderItem={this.renderItem.bind(this)}
         />
