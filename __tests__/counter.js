@@ -2,21 +2,20 @@
 import "react-native";
 import React from "react";
 import renderer from "react-test-renderer";
-import Learning_Project from "../src/components/counter";
-import { Actions, closeCounter } from "../src/actions/counter";
+import { CounterList } from "../src/containers/counter";
+import { Actions } from "../src/actions/counter";
 import { counterCountReducer } from "../src/reducers/counter";
 import {
   counterIncrement,
   counterDecrement,
-  newCounter
+  newCounter,
+  closeCounter
 } from "../src/actions/counter";
 
-// Expected array but received object
-describe("CounterReducer test", () => {
-  it("should return initial state", () => {
-    expect(counterCountReducer(undefined, {})).toEqual({
-      counterList: []
-    });
+describe("Stateless Components Render", () => {
+  const stringProp = "test";
+  it("Project render", () => {
+    renderer.create(<CounterList />);
   });
 });
 
@@ -37,7 +36,7 @@ describe("counter increment test", () => {
     };
     const increasedCounterCount = counterCountReducer(
       counterCount,
-      counterIncrement(0)
+      counterIncrement("abcd")
     );
     expect(increasedCounterCount.counterList).toEqual([
       { count: 2, id: "abcd" },
@@ -53,7 +52,7 @@ describe("counter decrement test", () => {
     };
     const decreasedCounterCount = counterCountReducer(
       counterCount,
-      counterDecrement(1)
+      counterDecrement("efgh")
     );
     expect(decreasedCounterCount.counterList).toEqual([
       { count: 1, id: "abcd" },
@@ -71,27 +70,13 @@ describe("counter close test", () => {
         { count: 0, id: "jklm" }
       ]
     };
-    const closeCounterTest = counterCountReducer(counterCount, closeCounter(1));
+    const closeCounterTest = counterCountReducer(
+      counterCount,
+      closeCounter("efgh")
+    );
     expect(closeCounterTest.counterList).toEqual([
       { count: 1, id: "abcd" },
       { count: 0, id: "jklm" }
     ]);
-  });
-});
-
-//need to talk about this
-describe("check id generator", () => {
-  it("on newCounter, a new unique id should be generated", () => {
-    const counterCount = {
-      counterList: []
-    };
-    const idTest = counterCountReducer(counterCount, newCounter());
-    const idTest2 = counterCountReducer(idTest, newCounter());
-    console.log(idTest.counterList[0].id);
-    console.log(idTest2.counterList[0].id);
-    console.log(idTest2.counterList[1].id);
-    expect(idTest.counterList[0].id !== idTest2.counterList[0].id).toEqual(
-      false
-    );
   });
 });

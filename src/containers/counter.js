@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
   }
 });
 
-class CounterList extends Component {
-  renderItem({ data, index }) {
+export class CounterList extends Component {
+  renderItem({ item, index }) {
     return (
       <CounterRow
-        data={this.props.counterList[index]}
+        data={item}
         //actions={{ counterIncrement: this.props.actions.counterIncrement }}
         counterIncrement={this.props.actions.counterIncrement}
         counterDecrement={this.props.actions.counterDecrement}
