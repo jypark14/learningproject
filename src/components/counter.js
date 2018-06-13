@@ -19,20 +19,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "stretch"
   },
-  counter_col: {
-    flex: 1,
-    flexDirection: "column"
-  },
   text: {
     fontFamily: "Roboto-Light",
     fontSize: 20,
     flexDirection: "row",
     textAlign: "center",
     margin: 10
-  },
-  close_button: {
-    flexDirection: "row",
-    textAlign: "center"
   }
 });
 

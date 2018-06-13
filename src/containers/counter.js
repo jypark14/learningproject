@@ -10,8 +10,7 @@ import {
   counterDecrement,
   newCounter,
   closeCounter,
-  requestApiData,
-  receiveApiData
+  requestApiData
 } from "../actions/counter";
 import CounterRow from "../components/counter";
 import uuid from "uuid";
@@ -69,8 +68,7 @@ const mapDispatchToProps = dispatch => ({
       counterDecrement,
       newCounter,
       closeCounter,
-      requestApiData,
-      receiveApiData
+      requestApiData
     },
     dispatch
   )
