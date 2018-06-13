@@ -10,7 +10,8 @@ import {
   counterDecrement,
   newCounter,
   closeCounter,
-  requestApiData
+  requestApiData,
+  receiveApiData
 } from "../actions/counter";
 import CounterRow from "../components/counter";
 import uuid from "uuid";
@@ -23,8 +24,10 @@ const styles = StyleSheet.create({
 });
 
 export class CounterList extends Component {
-  componentDidMount() {}
-
+  componentDidMount() {
+    this.props.actions.requestApiData(); //fat arrow
+    console.log("componentdidmount!");
+  }
   renderItem({ item, index }) {
     return (
       <CounterRow
@@ -38,12 +41,6 @@ export class CounterList extends Component {
   render() {
     return (
       <View style={styles.counter_col}>
-        <Button
-          large
-          title="Data"
-          color="blue"
-          onPress={() => this.props.actions.requestApiData()}
-        />
         <Button
           large
           title="Add counter"
@@ -72,7 +69,8 @@ const mapDispatchToProps = dispatch => ({
       counterDecrement,
       newCounter,
       closeCounter,
-      requestApiData
+      requestApiData,
+      receiveApiData
     },
     dispatch
   )

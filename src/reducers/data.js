@@ -1,9 +1,9 @@
 // @ts-check
-import { RECEIVE_API_DATA } from "../actions/counter";
+import { Actions } from "../actions/counter";
 
 export default (state = {}, { type, data }) => {
   switch (type) {
-    case RECEIVE_API_DATA:
+    case Actions.receiveApiData:
       return data;
     default:
       return state;

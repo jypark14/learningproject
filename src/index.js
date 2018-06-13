@@ -9,9 +9,6 @@ import CounterList from "./containers/counter";
 import { View } from "react-native";
 import store from "./store";
 
-//creating store vs importing it from store file
-// const store = createStore(rootReducer);
-
 class App extends Component {
   render() {
     return (

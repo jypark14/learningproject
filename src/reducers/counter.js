@@ -15,10 +15,8 @@ const counterCount = {
 export const counterCountReducer = (state = counterCount, action) => {
   switch (action.type) {
     case Actions.receiveApiData: {
-      const initialList = action.data;
-      return Object.assign({}, state, { counterList: initialList });
+      return Object.assign({}, state, { counterList: action.data });
     }
-
     case Actions.newCounter: {
       const counterNew = Object.assign({}, counter, { id: action.id });
       const newCounterList = [...state.counterList, counterNew];

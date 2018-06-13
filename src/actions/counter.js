@@ -1,22 +1,21 @@
 // @ts-check
-export const REQUEST_API_DATA = "REQUEST_API_DATA";
-export const RECEIVE_API_DATA = "RECEIVE_API_DATA";
-
-export const requestApiData = () => ({
-  type: REQUEST_API_DATA
-});
-export const receiveApiData = data => ({
-  type: RECEIVE_API_DATA,
-  data
-});
 
 export const Actions = {
   Increment: "Increment",
   Decrement: "Decrement",
   newCounter: "newCounter",
-  closeCounter: "closeCounter"
+  closeCounter: "closeCounter",
+  requestApiData: "requestApiData",
+  receiveApiData: "receiveApiData"
 };
 
+export const requestApiData = () => ({
+  type: Actions.requestApiData
+});
+export const receiveApiData = data => ({
+  type: Actions.receiveApiData,
+  data
+});
 export const newCounter = id => ({
   type: Actions.newCounter,
   id
