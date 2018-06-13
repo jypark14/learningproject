@@ -9,7 +9,8 @@ import {
   counterIncrement,
   counterDecrement,
   newCounter,
-  closeCounter
+  closeCounter,
+  requestApiData
 } from "../actions/counter";
 import CounterRow from "../components/counter";
 import uuid from "uuid";
@@ -37,6 +38,12 @@ export class CounterList extends Component {
       <View style={styles.counter_col}>
         <Button
           large
+          title="Data"
+          color="blue"
+          onPress={() => this.props.actions.requestApiData()}
+        />
+        <Button
+          large
           title="Add counter"
           color="blue"
           onPress={() => this.props.actions.newCounter(uuid.v4())}
@@ -52,7 +59,8 @@ export class CounterList extends Component {
 }
 
 const mapStateToProps = state => ({
-  counterList: state.counterCountReducer.counterList
+  counterList: state.counterCountReducer.counterList,
+  data: state.data
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -61,7 +69,8 @@ const mapDispatchToProps = dispatch => ({
       counterIncrement,
       counterDecrement,
       newCounter,
-      closeCounter
+      closeCounter,
+      requestApiData
     },
     dispatch
   )
