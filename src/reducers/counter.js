@@ -1,6 +1,7 @@
 // @ts-check
 
 import { Actions } from "../actions/counter";
+import mySaga from "../sagas/index";
 
 const counter = {
   count: 0,
@@ -13,6 +14,11 @@ const counterCount = {
 
 export const counterCountReducer = (state = counterCount, action) => {
   switch (action.type) {
+    case Actions.receiveApiData: {
+      const initialList = action.data;
+      return Object.assign({}, state, { counterList: initialList });
+    }
+
     case Actions.newCounter: {
       const counterNew = Object.assign({}, counter, { id: action.id });
       const newCounterList = [...state.counterList, counterNew];

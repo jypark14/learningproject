@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
 });
 
 export class CounterList extends Component {
+  componentDidMount() {}
+
   renderItem({ item, index }) {
     return (
       <CounterRow
