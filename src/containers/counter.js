@@ -30,8 +30,15 @@ const styles = StyleSheet.create({
 });
 
 export class CounterList extends Component {
+  // componentWillMount() {
+  //   {
+  //     console.log(this.props.actions.requestApiData);
+  //     return this.props.actions.requestApiData;
+  //   }
+  // }
+
   componentWillMount() {
-    this.props.actions.requestApiData();
+    this.props.actions.requestApiData;
   }
 
   renderItem({ item, index }) {
