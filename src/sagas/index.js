@@ -13,7 +13,7 @@ import { fetchData } from "./api";
 import initalState from "../reducers/data";
 import uuid from "uuid";
 
-function* getApiData(action) {
+export function* getApiData(action) {
   try {
     const data = yield call(fetchData);
 
@@ -25,13 +25,17 @@ function* getApiData(action) {
 
     const counters = data.data
       .map(counter => {
-        return { pos: counterPosByID[counter.id].pos, count: counter.count };
+        return {
+          pos: counterPosByID[counter.id].pos,
+          count: counter.count,
+          id: counter.id
+        };
       })
       .sort(function(a, b) {
         return a.pos - b.pos;
       })
       .map(counter => {
-        return { count: counter.count, id: uuid.v4() };
+        return { count: counter.count, id: counter.id.toString() };
       });
 
     yield put(receiveApiData(counters));

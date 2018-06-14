@@ -93,3 +93,34 @@ describe("counter close test", () => {
     ]);
   });
 });
+
+import { runSaga } from "redux-saga";
+
+import { requestApiData, receiveApiData } from "../src/actions/counter";
+import { getApiData } from "../src/sagas/index";
+
+jest.mock("../src/sagas/api");
+
+describe("API sagas", () => {
+  it("Download data", async () => {
+    const dispatched = [];
+
+    const sagaParams = requestApiData();
+    await runSaga(
+      {
+        dispatch: action => dispatched.push(action)
+      },
+      getApiData,
+      sagaParams
+    ).done;
+
+    const transformedData = [
+      { count: 14, id: "7" },
+      { count: 20, id: "5" },
+      { count: 43, id: "8" },
+      { count: 75, id: "6" }
+    ];
+
+    expect(dispatched).toEqual([receiveApiData(transformedData)]);
+  });
+});
