@@ -4,9 +4,23 @@ export const Actions = {
   Increment: "Increment",
   Decrement: "Decrement",
   newCounter: "newCounter",
-  closeCounter: "closeCounter"
+  closeCounter: "closeCounter",
+  requestApiData: "requestApiData",
+  receiveApiData: "receiveApiData",
+  apiDataError: "apiDataError"
 };
 
+export const apiDataError = () => ({
+  type: Actions.apiDataError
+});
+
+export const requestApiData = () => ({
+  type: Actions.requestApiData
+});
+export const receiveApiData = data => ({
+  type: Actions.receiveApiData,
+  data
+});
 export const newCounter = id => ({
   type: Actions.newCounter,
   id

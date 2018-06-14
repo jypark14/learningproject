@@ -2,16 +2,11 @@
 
 import React, { Component } from "react";
 import { AppRegistry } from "react-native";
-import { createStore } from "redux";
-
 import { Provider } from "react-redux";
-import rootReducer from "./reducers/root";
 
-import CounterList from "./containers/counter";
+import CounterList from "./containers/counterList";
 
-import { View } from "react-native";
-
-const store = createStore(rootReducer);
+import store from "./store";
 
 class App extends Component {
   render() {

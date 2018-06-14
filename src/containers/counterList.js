@@ -3,30 +3,41 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList, Image } from "react-native";
 import { Button } from "react-native-elements";
 import {
   counterIncrement,
   counterDecrement,
   newCounter,
-  closeCounter
+  closeCounter,
+  requestApiData
 } from "../actions/counter";
-import CounterRow from "../components/counter";
+import CounterRow from "../components/counterRow";
 import uuid from "uuid";
 
 const styles = StyleSheet.create({
   counter_col: {
     flex: 1,
     flexDirection: "column"
+  },
+  image: {
+    flex: 1,
+    width: undefined,
+    height: undefined,
+    justifyContent: "center",
+    alignSelf: "center"
   }
 });
 
 export class CounterList extends Component {
+  componentWillMount() {
+    this.props.actions.requestApiData();
+  }
+
   renderItem({ item, index }) {
     return (
       <CounterRow
         data={item}
-        //actions={{ counterIncrement: this.props.actions.counterIncrement }}
         counterIncrement={this.props.actions.counterIncrement}
         counterDecrement={this.props.actions.counterDecrement}
         closeCounter={this.props.actions.closeCounter}
@@ -34,6 +45,22 @@ export class CounterList extends Component {
     );
   }
   render() {
+    if (this.props.loading) {
+      return (
+        <View style={styles.image}>
+          <Image source={require("../assets/images/loading.png")} />
+        </View>
+      );
+    }
+
+    if (this.props.error) {
+      return (
+        <View style={styles.image}>
+          <Image source={require("../assets/images/error.png")} />
+        </View>
+      );
+    }
+
     return (
       <View style={styles.counter_col}>
         <Button
@@ -44,10 +71,6 @@ export class CounterList extends Component {
         />
         <FlatList
           keyExtractor={cell => cell.id}
-          // Below is the same code
-          //   keyExtractor={cell => {
-          //     return cell.id;
-          //   }}
           data={this.props.counterList}
           renderItem={this.renderItem.bind(this)}
         />
@@ -57,7 +80,9 @@ export class CounterList extends Component {
 }
 
 const mapStateToProps = state => ({
-  counterList: state.counterCountReducer.counterList
+  counterList: state.counterCountReducer.counterList,
+  loading: state.data.loading,
+  error: state.data.error
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -66,7 +91,8 @@ const mapDispatchToProps = dispatch => ({
       counterIncrement,
       counterDecrement,
       newCounter,
-      closeCounter
+      closeCounter,
+      requestApiData
     },
     dispatch
   )

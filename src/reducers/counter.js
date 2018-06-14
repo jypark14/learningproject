@@ -1,5 +1,4 @@
 // @ts-check
-
 import { Actions } from "../actions/counter";
 
 const counter = {
@@ -13,6 +12,10 @@ const counterCount = {
 
 export const counterCountReducer = (state = counterCount, action) => {
   switch (action.type) {
+    case Actions.receiveApiData: {
+      return Object.assign({}, state, { counterList: action.data });
+    }
+
     case Actions.newCounter: {
       const counterNew = Object.assign({}, counter, { id: action.id });
       const newCounterList = [...state.counterList, counterNew];
@@ -20,7 +23,7 @@ export const counterCountReducer = (state = counterCount, action) => {
     }
 
     case Actions.closeCounter: {
-      const deletedList = state.counterList.filter((elem, index) => {
+      const deletedList = state.counterList.filter(elem => {
         if (action.key !== elem.id) {
           return { count: elem.count, id: elem.id };
         }
@@ -29,7 +32,7 @@ export const counterCountReducer = (state = counterCount, action) => {
     }
 
     case Actions.Increment: {
-      const newCounters = state.counterList.map((elem, index) => {
+      const newCounters = state.counterList.map(elem => {
         if (elem.id === action.key) {
           return { count: elem.count + 1, id: elem.id };
         }
@@ -39,7 +42,7 @@ export const counterCountReducer = (state = counterCount, action) => {
     }
 
     case Actions.Decrement: {
-      const newCounters = state.counterList.map((elem, index) => {
+      const newCounters = state.counterList.map(elem => {
         if (elem.id === action.key) {
           return { count: elem.count - 1, id: elem.id };
         }
