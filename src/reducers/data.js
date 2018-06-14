@@ -1,8 +1,9 @@
 // @ts-check
 import { Actions } from "../actions/counter";
 
-const initalState = {
-  loading: false
+export const initalState = {
+  loading: false,
+  error: false
 };
 
 export default (state = initalState, { type, data }) => {
@@ -11,6 +12,8 @@ export default (state = initalState, { type, data }) => {
       return Object.assign({}, state, { loading: true });
     case Actions.receiveApiData:
       return Object.assign({}, state, { loading: false });
+    case Actions.apiDataError:
+      return Object.assign({}, state, { error: true });
     default:
       return state;
   }

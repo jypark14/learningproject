@@ -6,8 +6,13 @@ export const Actions = {
   newCounter: "newCounter",
   closeCounter: "closeCounter",
   requestApiData: "requestApiData",
-  receiveApiData: "receiveApiData"
+  receiveApiData: "receiveApiData",
+  apiDataError: "apiDataError"
 };
+
+export const apiDataError = () => ({
+  type: Actions.apiDataError
+});
 
 export const requestApiData = () => ({
   type: Actions.requestApiData

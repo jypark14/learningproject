@@ -52,6 +52,13 @@ export class CounterList extends Component {
         </View>
       );
     }
+    if (this.props.error) {
+      return (
+        <View style={styles.image}>
+          <Image source={require("../assets/images/error.png")} />
+        </View>
+      );
+    }
 
     return (
       <View style={styles.counter_col}>
