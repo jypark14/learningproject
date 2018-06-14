@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList, Image } from "react-native";
 import { Button } from "react-native-elements";
 import {
   counterIncrement,
@@ -19,14 +19,21 @@ const styles = StyleSheet.create({
   counter_col: {
     flex: 1,
     flexDirection: "column"
+  },
+  image: {
+    flex: 1,
+    width: undefined,
+    height: undefined,
+    justifyContent: "center",
+    alignSelf: "center"
   }
 });
 
 export class CounterList extends Component {
-  componentDidMount() {
-    this.props.actions.requestApiData(); //fat arrow
-    console.log("componentdidmount!");
+  componentWillMount() {
+    this.props.actions.requestApiData();
   }
+
   renderItem({ item, index }) {
     return (
       <CounterRow
@@ -38,6 +45,14 @@ export class CounterList extends Component {
     );
   }
   render() {
+    if (this.props.loading) {
+      return (
+        <View style={styles.image}>
+          <Image source={require("../assets/images/loading.png")} />
+        </View>
+      );
+    }
+
     return (
       <View style={styles.counter_col}>
         <Button
@@ -58,7 +73,7 @@ export class CounterList extends Component {
 
 const mapStateToProps = state => ({
   counterList: state.counterCountReducer.counterList,
-  data: state.data
+  loading: state.data.loading
 });
 
 const mapDispatchToProps = dispatch => ({
