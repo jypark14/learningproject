@@ -2,7 +2,7 @@
 import "react-native";
 import React from "react";
 import renderer from "react-test-renderer";
-import { CounterList } from "../src/containers/counter";
+import { CounterList } from "../src/containers/counterList";
 import { Actions } from "../src/actions/counter";
 import { counterCountReducer } from "../src/reducers/counter";
 import {

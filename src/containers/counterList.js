@@ -12,7 +12,7 @@ import {
   closeCounter,
   requestApiData
 } from "../actions/counter";
-import CounterRow from "../components/counter";
+import CounterRow from "../components/counterRow";
 import uuid from "uuid";
 
 const styles = StyleSheet.create({
