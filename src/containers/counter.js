@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 
 export class CounterList extends Component {
   componentWillMount() {
-    this.props.actions.requestApiData;
+    this.props.actions.requestApiData();
   }
 
   renderItem({ item, index }) {

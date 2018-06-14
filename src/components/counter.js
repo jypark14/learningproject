@@ -28,39 +28,33 @@ const styles = StyleSheet.create({
   }
 });
 
-interface IProps {
-  loading: boolean;
-}
-
-class CounterRow extends Component {
-  render() {
-    return (
-      <View style={styles.counter_row}>
-        <Button
-          title="Increment +"
-          color="green"
-          onPress={() => {
-            this.props.counterIncrement(this.props.data.id);
-          }}
-        />
-        <Text style={styles.text}>{this.props.data.count}</Text>
-        <Button
-          title="Decrement -"
-          color="red"
-          onPress={() => {
-            this.props.counterDecrement(this.props.data.id);
-          }}
-        />
-        <Button
-          title="X"
-          color="black"
-          onPress={() => {
-            this.props.closeCounter(this.props.data.id);
-          }}
-        />
-      </View>
-    );
-  }
-}
+const CounterRow = props => {
+  return (
+    <View style={styles.counter_row}>
+      <Button
+        title="Increment +"
+        color="green"
+        onPress={() => {
+          props.counterIncrement(props.data.id);
+        }}
+      />
+      <Text style={styles.text}>{props.data.count}</Text>
+      <Button
+        title="Decrement -"
+        color="red"
+        onPress={() => {
+          props.counterDecrement(props.data.id);
+        }}
+      />
+      <Button
+        title="X"
+        color="black"
+        onPress={() => {
+          props.closeCounter(props.data.id);
+        }}
+      />
+    </View>
+  );
+};
 
 export default CounterRow;
