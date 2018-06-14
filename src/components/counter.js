@@ -28,10 +28,6 @@ const styles = StyleSheet.create({
   }
 });
 
-interface IProps {
-  loading: boolean;
-}
-
 class CounterRow extends Component {
   render() {
     return (

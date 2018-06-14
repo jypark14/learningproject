@@ -15,7 +15,13 @@ import {
 describe("Stateless Components Render", () => {
   const stringProp = "test";
   it("Project render", () => {
-    renderer.create(<CounterList />);
+    renderer.create(
+      <CounterList
+        counterList={[]}
+        //loading
+        //actions
+      />
+    );
   });
 });
 

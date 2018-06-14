@@ -30,18 +30,11 @@ const styles = StyleSheet.create({
 });
 
 export class CounterList extends Component {
-  // componentWillMount() {
-  //   {
-  //     console.log(this.props.actions.requestApiData);
-  //     return this.props.actions.requestApiData;
-  //   }
-  // }
-
   componentWillMount() {
-    this.props.actions.requestApiData;
+    this.props.actions.requestApiData();
   }
 
-  renderItem({ item, index }) {
+  renderItem({ item }) {
     return (
       <CounterRow
         data={item}
@@ -87,7 +80,8 @@ export class CounterList extends Component {
 
 const mapStateToProps = state => ({
   counterList: state.counterCountReducer.counterList,
-  loading: state.data.loading
+  loading: state.data.loading,
+  error: state.data.error
 });
 
 const mapDispatchToProps = dispatch => ({
