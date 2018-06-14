@@ -52,6 +52,7 @@ export class CounterList extends Component {
         </View>
       );
     }
+
     if (this.props.error) {
       return (
         <View style={styles.image}>
@@ -80,7 +81,8 @@ export class CounterList extends Component {
 
 const mapStateToProps = state => ({
   counterList: state.counterCountReducer.counterList,
-  loading: state.data.loading
+  loading: state.data.loading,
+  error: state.data.error
 });
 
 const mapDispatchToProps = dispatch => ({
