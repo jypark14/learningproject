@@ -13,9 +13,22 @@ import {
 } from "../src/actions/counter";
 
 describe("Stateless Components Render", () => {
-  const stringProp = "test";
-  it("Project render", () => {
-    renderer.create(<CounterList />);
+  const emptyFunc = () => undefined;
+
+  it("CounterList renders", () => {
+    renderer.create(
+      <CounterList
+        counterList={[]}
+        loading={true}
+        actions={{
+          counterIncrement: emptyFunc,
+          counterDecrement: emptyFunc,
+          newCounter: emptyFunc,
+          closeCounter: emptyFunc,
+          requestApiData: emptyFunc
+        }}
+      />
+    );
   });
 });
 
