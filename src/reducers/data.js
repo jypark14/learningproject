@@ -13,7 +13,7 @@ export default (state = initalState, { type, data }) => {
     case Actions.receiveApiData:
       return Object.assign({}, state, { loading: false });
     case Actions.apiDataError:
-      return Object.assign({}, state, { error: true });
+      return Object.assign({}, state, { error: true, loading: false });
     default:
       return state;
   }

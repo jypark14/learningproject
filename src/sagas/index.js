@@ -13,29 +13,32 @@ import { fetchData } from "./api";
 import initalState from "../reducers/data";
 import uuid from "uuid";
 
-function* getApiData(action) {
+export function* getApiData(action) {
   try {
     const data = yield call(fetchData);
-    const modifiedList = [];
 
-    data.counters.map(key => {
-      data.data.map(key2 => {
-        if (key2.id === key.id) {
-          const temp = [key.pos, key2.count, key2.id];
-          modifiedList.push(temp);
-        }
-      });
-    });
+    const counterPosByID = data.counters.reduce((acc, counter) => {
+      acc[counter.id] = counter;
 
-    const initialCounter = modifiedList
-      .sort(function(a, b) {
-        return a[0] - b[0];
+      return acc;
+    }, {});
+
+    const counters = data.data
+      .map(counter => {
+        return {
+          pos: counterPosByID[counter.id].pos,
+          count: counter.count,
+          id: counter.id
+        };
       })
-      .map(key => {
-        return { count: key[1], id: uuid.v4() };
+      .sort(function(a, b) {
+        return a.pos - b.pos;
+      })
+      .map(counter => {
+        return { count: counter.count, id: counter.id.toString() };
       });
 
-    yield put(receiveApiData(initialCounter));
+    yield put(receiveApiData(counters));
   } catch (e) {
     yield put(apiDataError());
   }
